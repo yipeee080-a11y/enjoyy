@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unlock 💖</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="unlock-bg">
+
+  <div class="lock-card">
+    <h1>🔒 Only you can enter</h1>
+    <p class="question">who is the dummer among us??</p>
+
+    <input type="text" id="answer" placeholder="Type your answer..." />
+    <button onclick="checkAnswer()">Unlock 💗</button>
+
+    <p id="response"></p>
+  </div>
+
+  <!-- MAIN SCRIPT -->
+  <script>
+    function checkAnswer() {
+      const ans = document.getElementById("answer").value
+        .toLowerCase()
+        .trim();
+
+      const response = document.getElementById("response");
+
+      if (ans === "you") {
+        response.innerHTML = "😂 Correct. Entry granted 💖";
+        response.style.color = "lightgreen";
+
+        setTimeout(() => {
+          cinematicExit("index.html");
+        }, 1500);
+
+      } else if (ans === "me") {
+        response.innerHTML = "Nice try 😏 but nope";
+        response.style.color = "#ff8fab";
+
+      } else {
+        response.innerHTML = "Hmm… think again 🤔";
+        response.style.color = "#fff";
+      }
+    }
+  </script>
+
+  <!-- INTERACTION SCRIPT -->
+  <script src="experience.js"></script>
+
+</body>
+</html>

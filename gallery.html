@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Memories 🎁</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="gallery-bg">
+
+  <div class="gallery-container">
+    <h1>Open them one by one 💫</h1>
+    <p class="gallery-sub">Each box holds a memory</p>
+    <p id="progress" class="progress-text">0 / 12 opened</p>
+    <p id="reaction" class="reaction-text"></p>
+
+    <div class="box-grid">
+      <div class="box"><span>1</span></div>
+      <div class="box"><span>2</span></div>
+      <div class="box"><span>3</span></div>
+      <div class="box"><span>4</span></div>
+      <div class="box"><span>5</span></div>
+      <div class="box"><span>6</span></div>
+      <div class="box"><span>7</span></div>
+      <div class="box"><span>8</span></div>
+      <div class="box"><span>9</span></div>
+      <div class="box"><span>10</span></div>
+      <div class="box"><span>11</span></div>
+      <div class="box"><span>12</span></div>
+    </div>
+
+    <p id="completeMsg" class="complete-msg" style="display:none">
+      That’s all of them. Thanks for taking your time 💛
+    </p>
+
+    <button id="nextBtn" style="display:none" onclick="goNext()">
+      Continue 💌
+    </button>
+  </div>
+
+  <!-- IMAGE MODAL -->
+  <div id="imgModal" class="img-modal" onclick="closeImg()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <img id="modalImg">
+    <div id="modalCaption" class="modal-caption"></div>
+  </div>
+</div>
+
+
+
+  <script>
+  const images = [
+    "images/pic1.jpg",
+    "images/pic2.jpg",
+    "images/pic3.jpg",
+    "images/pic4.jpg",
+    "images/pic5.jpg",
+    "images/pic6.jpg",
+    "images/pic7.jpg",
+    "images/pic8.jpg",
+    "images/pic9.jpg",
+    "images/pic10.jpg",
+    "images/pic11.jpg",
+    "images/pic12.jpg"
+  ];
+
+  const captions = [
+    "This one's ur favourite.",
+  "tht boy cut suited you.",
+  "who has eyes on whom???",
+  "Come'on leka's teaching something.",
+  "Your white hair stole the show.",
+  "Even the horses are scared.",
+  "Who's that innocent guy!!??",
+  "Leka in her prime.",
+  "This one's chaotic.",
+  "alwayss hungryyy!!",
+  "Remember this??",
+  "This one's the best one."
+  ];
+
+  const boxes = document.querySelectorAll(".box");
+  const modal = document.getElementById("imgModal");
+  const modalImg = document.getElementById("modalImg");
+  const modalCaption = document.getElementById("modalCaption");
+  const progressText = document.getElementById("progress");
+
+  let index = 0;
+
+  boxes.forEach((box) => {
+    box.addEventListener("click", () => {
+      if (box.classList.contains("opened")) return;
+      if (index >= images.length) return;
+
+      modalImg.src = images[index];
+      modalCaption.textContent = captions[index];
+      modal.style.display = "flex";
+
+      box.classList.add("opened");
+      box.querySelector("span").style.opacity = "0.4";
+
+      index++;
+      progressText.textContent = `${index} / ${images.length} opened`;
+
+      if (index === images.length) {
+        document.getElementById("completeMsg").style.display = "block";
+        document.getElementById("nextBtn").style.display = "inline-block";
+      }
+    });
+  });
+
+  function closeImg() {
+    modal.style.display = "none";
+  }
+
+  function goNext() {
+    cinematicExit("letter.html");
+  }
+</script>
+
+
+  <script src="experience.js"></script>
+
+</body>
+</html>

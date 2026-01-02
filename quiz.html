@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Little Quiz 💭</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="landing-bg">
+
+  <div class="landing-card">
+    <h1 id="question">Okay… one question 😊</h1>
+    <p class="intro-text" id="subtext">
+      Just answer honestly
+    </p>
+
+    <div class="quiz-options">
+      <button onclick="answer(0)">Always 😌</button>
+      <button onclick="answer(1)">Sometimes 🤔</button>
+      <button onclick="answer(2)">Maybe 😄</button>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+  {
+    q: "Who do you think is the cooler one between us?",
+    reactions: [
+      "Correct answer 😏",
+      "Hmm debatable 😄",
+      "I’ll let this slide 😉"
+    ]
+  },
+  {
+    q: "do you think your cooler than me ?",
+    reactions: [
+      "yeah ig 💫",
+      "u sure😊?",
+      "You’re right 😉"
+    ]
+  },
+  {
+    q: "Ready to see something nice?",
+    reactions: [
+      "Good choice 💖",
+      "You won’t regret it 😌",
+      "Let’s go then ✨"
+    ]
+  }
+];
+
+    
+
+    let current = 0;
+    const questionEl = document.getElementById("question");
+    const subtextEl = document.getElementById("subtext");
+
+    function answer(choice) {
+      subtextEl.innerText = questions[current].reactions[choice];
+
+      setTimeout(() => {
+        current++;
+
+        if (current < questions.length) {
+          questionEl.innerText = questions[current].q;
+          subtextEl.innerText = "Just answer honestly";
+        } else {
+          cinematicExit("gallery.html");
+        }
+      }, 900);
+    }
+  </script>
+
+  <script src="experience.js"></script>
+
+</body>
+</html>

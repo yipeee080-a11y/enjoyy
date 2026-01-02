@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You 🌙</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="night-bg">
+
+  <!-- Stars -->
+  <div class="stars"></div>
+
+  <!-- Moon -->
+  <div class="moon"></div>
+
+  <!-- LETTER CARD -->
+  <div class="letter-card">
+    <h1>LEKAAAAA AUNTYYYY</h1>
+
+    <p class="letter-text">
+     Manyyyyy moree Happy returns of the day legaaaaaaaaaa....I'm so excited 😋........u've always been the best person ik 
+     .........since uk it all I'll keep it short ....... I'm really grateful for u even being born the same time as me ...... 
+     thank you for all the things u've done to me 😊....and ik i hurt u a lottttt 🙂.....I'm really sorry😔....
+     and you owe me nothing i did all those out of love .........
+     once again wishing u the happiest birthday auntyyyyyyyy🥳🥳🥳<br><br>
+
+      I’m really grateful for you.
+    </p>
+
+    <button onclick="finalMoment()">🎆 One last thing</button>
+  </div>
+
+  <!-- FIREWORKS CANVAS -->
+  <canvas id="fireworks"></canvas>
+
+  <!-- FINAL MESSAGE (HIDDEN INITIALLY) -->
+  <div id="fireworkMsg" class="firework-msg">
+    Once again HAPPY BIRTHDAY!! 🌙💖<br>
+    You’re finally 20 😌<br>
+    Auntyyyyyyy!!!
+  </div>
+  <div id="finalPhoto" class="final-photo">
+  <img src="images/pic13.jpg" alt="Her photo">
+  <p>I hope you enjoyed it<br>I'm really grateful you exist 💛</p>
+</div>
+
+
+  <!-- SCRIPT -->
+  <script>
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function firework() {
+      const x = random(100, canvas.width - 100);
+      const y = random(80, canvas.height / 2);
+      const particles = [];
+
+      for (let i = 0; i < 70; i++) {
+        particles.push({
+          x,
+          y,
+          angle: Math.random() * Math.PI * 2,
+          speed: random(1.5, 4),
+          radius: 2,
+          life: 90
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += Math.cos(p.angle) * p.speed;
+          p.y += Math.sin(p.angle) * p.speed;
+          p.life--;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(255,200,255,0.8)";
+          ctx.fill();
+        });
+
+        if (particles.some(p => p.life > 0)) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      animate();
+    }
+
+   function startFireworks() {
+  const canvas = document.getElementById("fireworks");
+  const msg = document.getElementById("fireworkMsg");
+  const finalPhoto = document.getElementById("finalPhoto");
+
+  // Launch fireworks
+  for (let i = 0; i < 7; i++) {
+    setTimeout(firework, i * 500);
+  }
+
+  // Fade out fireworks
+  setTimeout(() => {
+    canvas.classList.add("fade-out");
+  }, 4500);
+
+  // Fade out birthday message
+  setTimeout(() => {
+    msg.classList.add("fade-out");
+  }, 5500);
+
+  // Show final photo + message
+  setTimeout(() => {
+    finalPhoto.style.opacity = "1";
+  }, 7000);
+}
+
+
+
+    function finalMoment() {
+      const card = document.querySelector(".letter-card");
+      const msg = document.getElementById("fireworkMsg");
+
+      // Fade out letter
+      card.style.opacity = "0";
+      card.style.transform = "scale(0.95)";
+
+      setTimeout(() => {
+        card.style.display = "none";
+
+        // Show final message
+        msg.style.opacity = "1";
+
+        // Start fireworks
+        startFireworks();
+      }, 1000);
+    }
+  </script>
+
+  <script src="experience.js"></script>
+
+</body>
+</html>
